@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>后勤装备4.0</title>
+<style>
+.container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+.log-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+.important { color: red; font-weight: bold; }
+button { margin: 5px; padding: 5px 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>后勤装备对象</h1>
+    <div id="logistics"></div>
+    <button onclick="addLog()">添加装备</button>
+</div>
+
+<script>
+let logistics = [
+    { title: "野战炊事车", content: "野外快速制作热食，单日供应200人伙食，适配复杂地形", important: true },
+    { title: "野战医疗方舱", content: "模块化手术室，可开展急救手术，自带供氧供电系统", important: false }
+];
+
+function showLog() {
+    let html = "";
+    for (let i = 0; i < logistics.length; i++) {
+        let n = logistics[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="log-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('logistics').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    logistics[index].important = !logistics[index].important;
+    showLog();
+}
+
+function addLog() {
+    let lTitle = prompt("后勤装备名称：");
+    let lContent = prompt("装备功能描述：");
+    logistics.push({ title: lTitle, content: lContent, important: false });
+    showLog();
+}
+
+showLog();
+</script>
+</body>
+</html>
