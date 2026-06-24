@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>战机库4.0</title>
+<style>
+.container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+.plane-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+.important { color: red; font-weight: bold; }
+button { margin: 5px; padding: 5px 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>战机对象</h1>
+    <div id="planes"></div>
+    <button onclick="addPlane()">添加战机</button>
+</div>
+
+<script>
+// 战机库4.0
+let planes = [
+    { title: "歼20", content: "隐身战机，最大飞行速度2.8马赫，作战半径2000km", important: true },
+    { title: "运20", content: "大型运输机，载重66吨，航程7800公里", important: false }
+];
+
+function showPlanes() {
+    let html = "";
+    for (let i = 0; i < planes.length; i++) {
+        let n = planes[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="plane-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('planes').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    planes[index].important = !planes[index].important;
+    showPlanes();
+}
+
+function addPlane() {
+    let planeTitle = prompt("新战机的名字：");
+    let planeContent = prompt("新战机的描述：");
+    planes.push({ title: planeTitle, content: planeContent, important: false });
+    showPlanes();
+}
+
+showPlanes();
+</script>
+</body>
+</html>
