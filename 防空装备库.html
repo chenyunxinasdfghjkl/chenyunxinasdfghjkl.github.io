@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>防空装备4.0</title>
+<style>
+.container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+.air-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+.important { color: red; font-weight: bold; }
+button { margin: 5px; padding: 5px 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>防空装备对象</h1>
+    <div id="airDef"></div>
+    <button onclick="addAirDef()">添加防空装备</button>
+</div>
+
+<script>
+let airDef = [
+    { title: "红旗9B", content: "远程区域防空导弹，射程200km，拦截战机、巡航导弹", important: true },
+    { title: "红旗17AE", content: "野战近程防空系统，伴随装甲部队机动，反低空目标", important: false }
+];
+
+function showAirDef() {
+    let html = "";
+    for (let i = 0; i < airDef.length; i++) {
+        let n = airDef[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="air-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('airDef').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    airDef[index].important = !airDef[index].important;
+    showAirDef();
+}
+
+function addAirDef() {
+    let aTitle = prompt("防空装备型号：");
+    let aContent = prompt("装备作用描述：");
+    airDef.push({ title: aTitle, content: aContent, important: false });
+    showAirDef();
+}
+
+showAirDef();
+</script>
+</body>
+</html>
