@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>导弹库4.0</title>
+<style>
+.container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+.missile-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+.important { color: red; font-weight: bold; }
+button { margin: 5px; padding: 5px 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>导弹对象</h1>
+    <div id="missiles"></div>
+    <button onclick="addMissile()">添加导弹</button>
+</div>
+
+<script>
+let missiles = [
+    { title: "东风41", content: "洲际核导弹，射程14000公里，多弹头分导突防", important: true },
+    { title: "鹰击21", content: "舰载高超音速反舰导弹，末端速度10马赫", important: false }
+];
+
+function showMissiles() {
+    let html = "";
+    for (let i = 0; i < missiles.length; i++) {
+        let n = missiles[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="missile-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('missiles').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    missiles[index].important = !missiles[index].important;
+    showMissiles();
+}
+
+function addMissile() {
+    let misTitle = prompt("新导弹的名字：");
+    let misContent = prompt("新导弹的描述：");
+    missiles.push({ title: misTitle, content: misContent, important: false });
+    showMissiles();
+}
+
+showMissiles();
+</script>
+</body>
+</html>
