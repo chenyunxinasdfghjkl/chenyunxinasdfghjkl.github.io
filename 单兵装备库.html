@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>单兵装备4.0</title>
+<style>
+.container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+.single-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+.important { color: red; font-weight: bold; }
+button { margin: 5px; padding: 5px 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>单兵装备对象</h1>
+    <div id="singleGear"></div>
+    <button onclick="addSingleGear()">添加单兵装备</button>
+</div>
+
+<script>
+let singleGear = [
+    { title: "新型单兵综合头盔", content: "集成夜视、通信、防弹、环境感知一体化作战头盔", important: true },
+    { title: "多功能战术背心", content: "模块化挂载，防弹插板、弹药、急救包快速携带", important: false }
+];
+
+function showSingleGear() {
+    let html = "";
+    for (let i = 0; i < singleGear.length; i++) {
+        let n = singleGear[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="single-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('singleGear').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    singleGear[index].important = !singleGear[index].important;
+    showSingleGear();
+}
+
+function addSingleGear() {
+    let gTitle = prompt("单兵装备名称：");
+    let gContent = prompt("装备用途描述：");
+    singleGear.push({ title: gTitle, content: gContent, important: false });
+    showSingleGear();
+}
+
+showSingleGear();
+</script>
+</body>
+</html>
