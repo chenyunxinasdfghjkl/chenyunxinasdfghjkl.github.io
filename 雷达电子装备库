@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>雷达电子装备4.0</title>
+<style>
+.container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+.radar-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+.important { color: red; font-weight: bold; }
+button { margin: 5px; padding: 5px 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>雷达电子装备对象</h1>
+    <div id="radars"></div>
+    <button onclick="addRadar()">添加雷达装备</button>
+</div>
+
+<script>
+let radars = [
+    { title: "反隐身米波雷达", content: "远距离探测隐身战机，可持续追踪低可探测空中目标", important: true },
+    { title: "车载电子干扰车", content: "压制敌方通信、雷达信号，实施电磁遮蔽与欺骗", important: false }
+];
+
+function showRadars() {
+    let html = "";
+    for (let i = 0; i < radars.length; i++) {
+        let n = radars[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="radar-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('radars').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    radars[index].important = !radars[index].important;
+    showRadars();
+}
+
+function addRadar() {
+    let rTitle = prompt("电子装备名称：");
+    let rContent = prompt("设备功能描述：");
+    radars.push({ title: rTitle, content: rContent, important: false });
+    showRadars();
+}
+
+showRadars();
+</script>
+</body>
+</html>
