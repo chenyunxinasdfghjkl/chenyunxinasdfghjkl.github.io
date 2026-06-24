@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>军舰库4.0</title>
+<style>
+.container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+.ship-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+.important { color: red; font-weight: bold; }
+button { margin: 5px; padding: 5px 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>军舰对象</h1>
+    <div id="ships"></div>
+    <button onclick="addShip()">添加军舰</button>
+</div>
+
+<script>
+let ships = [
+    { title: "福建舰", content: "电磁弹射航母，排水量8万余吨，搭载舰载隐身战机", important: true },
+    { title: "055驱逐舰", content: "万吨大驱，112单元垂直发射系统，区域防空核心", important: false }
+];
+
+function showShips() {
+    let html = "";
+    for (let i = 0; i < ships.length; i++) {
+        let n = ships[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="ship-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('ships').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    ships[index].important = !ships[index].important;
+    showShips();
+}
+
+function addShip() {
+    let shipTitle = prompt("新军舰的名字：");
+    let shipContent = prompt("新军舰的描述：");
+    ships.push({ title: shipTitle, content: shipContent, important: false });
+    showShips();
+}
+
+showShips();
+</script>
+</body>
+</html>
