@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>坦克库4.0</title>
+<style>
+.container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+.tank-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+.important { color: red; font-weight: bold; }
+button { margin: 5px; padding: 5px 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>坦克对象</h1>
+    <div id="tanks"></div>
+    <button onclick="addTank()">添加坦克</button>
+</div>
+
+<script>
+let tanks = [
+    { title: "99A主战坦克", content: "125mm滑膛炮，复合装甲，最大公路时速75km/h", important: true },
+    { title: "15式轻坦", content: "高原专用轻型坦克，适配山地、丛林机动作战", important: false }
+];
+
+function showTanks() {
+    let html = "";
+    for (let i = 0; i < tanks.length; i++) {
+        let n = tanks[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="tank-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('tanks').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    tanks[index].important = !tanks[index].important;
+    showTanks();
+}
+
+function addTank() {
+    let tankTitle = prompt("新坦克的名字：");
+    let tankContent = prompt("新坦克的描述：");
+    tanks.push({ title: tankTitle, content: tankContent, important: false });
+    showTanks();
+}
+
+showTanks();
+</script>
+</body>
+</html>
