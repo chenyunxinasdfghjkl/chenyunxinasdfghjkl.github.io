@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>军用无人机4.0</title>
+<style>
+.container { width: 500px; margin: 0 auto; border: 2px solid #333; padding: 20px; text-align: center; }
+.drone-item { margin: 10px 0; padding: 10px; border: 1px solid #ccc; text-align: left; }
+.important { color: red; font-weight: bold; }
+button { margin: 5px; padding: 5px 10px; }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>无人机对象</h1>
+    <div id="drones"></div>
+    <button onclick="addDrone()">添加无人机</button>
+</div>
+
+<script>
+let drones = [
+    { title: "翼龙3", content: "长航时察打一体无人机，续航40小时，可挂载精确制导弹药", important: true },
+    { title: "蜂群微型无人机", content: "单兵便携投放，集群侦察、电子干扰、自杀式打击", important: false }
+];
+
+function showDrones() {
+    let html = "";
+    for (let i = 0; i < drones.length; i++) {
+        let n = drones[i];
+        let cls = n.important ? "important" : "";
+        html += `<div class="drone-item">`;
+        html += `<h3 class="${cls}">${n.title}</h3>`;
+        html += `<p>${n.content}</p>`;
+        html += `<button onclick="toggleImportant(${i})">切换重要</button>`;
+        html += `</div>`;
+    }
+    document.getElementById('drones').innerHTML = html;
+}
+
+function toggleImportant(index) {
+    drones[index].important = !drones[index].important;
+    showDrones();
+}
+
+function addDrone() {
+    let dTitle = prompt("无人机型号名称：");
+    let dContent = prompt("性能描述：");
+    drones.push({ title: dTitle, content: dContent, important: false });
+    showDrones();
+}
+
+showDrones();
+</script>
+</body>
+</html>
